@@ -8,6 +8,8 @@ class Solution:
             j = 0   
             k = 0
             while j < len(word) and k < len(s):
+                if len(word[j:]) > len(s[k:]):
+                    break
                 if word[j] == s[k]:
                     j += 1
                 k += 1
