@@ -4,28 +4,23 @@ class Solution:
         # what we need is the max-min = 1 
         # 1,2,2,2,3,3,5,7
         # option one using hash map
-        # using 3 memory start, difference, end
-        nums.sort()
-        start = 0
-        middle = 0
-        end = 0
+        hashmap = {}
+        arr = []
         ans = 0
-        while end < len(nums):
-            if nums[start] == nums[end]:
-                middle += 1
-                end += 1
-            elif nums[start]+1 == nums[end]:
-                end += 1
+        for i in range(len(nums)):
+            if nums[i] in hashmap:
+                hashmap[nums[i]] += 1
             else:
-                if abs(nums[start]-nums[end-1]) == 1:
-                    ans = max(ans, end-start)
-                    start = middle
-                    middle = end
-                else:
-                    start = end
-                    middle = end
-        if nums[end-1] - nums[start] == 1:
-            ans = max(ans, end-start)
+                hashmap[nums[i]] = 1
+                arr.append(nums[i])
+        arr.sort()
+        for i in range(len(arr)-1):
+            if arr[i+1]-arr[i] == 1:
+                ans = max(ans, hashmap[arr[i+1]] + hashmap[arr[i]])
         return ans
+
+
+    
+        
         
         
