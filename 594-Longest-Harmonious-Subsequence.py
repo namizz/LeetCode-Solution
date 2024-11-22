@@ -4,19 +4,11 @@ class Solution:
         # what we need is the max-min = 1 
         # 1,2,2,2,3,3,5,7
         # option one using hash map
-        hashmap = {}
-        arr = []
+        hashmap = Counter(nums)
         ans = 0
-        for i in range(len(nums)):
-            if nums[i] in hashmap:
-                hashmap[nums[i]] += 1
-            else:
-                hashmap[nums[i]] = 1
-                arr.append(nums[i])
-        arr.sort()
-        for i in range(len(arr)-1):
-            if arr[i+1]-arr[i] == 1:
-                ans = max(ans, hashmap[arr[i+1]] + hashmap[arr[i]])
+        for i in hashmap:
+            if (i+1) in hashmap:
+                ans = max(ans, hashmap[i] + hashmap[i+1])
         return ans
 
 
