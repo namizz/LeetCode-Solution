@@ -3,14 +3,13 @@ class Solution:
         #sort strings in alphabetical order
         # iterate throught both strings 
         # find if magazine is formed from ransomNote
-        word1 = sorted(magazine)
-        word2 = sorted(ransomNote)
-        w1,w2 = 0,0
-        while w1 < len(word1) and w2 < len(word2):
-            if word2[w2] == word1[w1]:
-                w1 += 1
-                w2 += 1
+        word = Counter(magazine)
+        for i in ransomNote:
+            if i in word:
+                word[i] -= 1
+                if word[i] < 0:
+                    return False
             else:
-                w1 += 1
-        return True if w2 >= len(word2) else False 
+                return False
+        return True
         
