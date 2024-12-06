@@ -1,17 +1,28 @@
-class Solution:
+class Solution:  
     def shiftingLetters(self, s: str, shifts: List[List[int]]) -> str:
-        shifter = [0 for _ in range(len(s) + 1)]
-        print(shifter)
-        for start, end, d in shifts:
-            if d == 0:
-                shifter[start] -= 1
-                shifter[end + 1] += 1
+        # arr = [0]*n 
+        # shifts-->start, end, dir------------>iterate
+        # arr[start:end+1]---> 1 or -1
+        # iterate s if arr
+        arr = [0]*(len(s)+1)
+        for start, end, direction in shifts:
+            if direction == 1:
+                arr[start] += 1
+                if end + 1 < len(s): 
+                    arr[end+1] -= 1
             else:
-                shifter[start] += 1
-                shifter[end + 1] -= 1
-        adder = 0
+                arr[start] -= 1
+                if end + 1< len(s):
+                    arr[end + 1] += 1
+        
+        for i in range(1,len(s)):
+            arr[i] += arr[i-1]
+        ans = []
         for i in range(len(s)):
-            adder += shifter[i]
-            c = chr(((ord(s[i]) + adder) - 97) % 26 + 97)
-            s = s[:i] + c + s[i + 1:]
-        return s
+            asc = ord(s[i]) - 97
+            letter = (arr[i]+asc)%26 
+            ans.append(chr(letter + 97)) 
+        return "".join(ans)
+        
+
+        
