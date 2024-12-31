@@ -6,25 +6,28 @@
 #         self.right = right
 class Solution:
     def findMode(self, root: Optional[TreeNode]) -> List[int]:
-        hashmap = {}
-        def mode(tree):
+        mode = []
+        value = 0
+        count = 0
+        max_c = 0
+        def inorder(tree):
+            nonlocal max_c, value, mode, count
             if not tree:
                 return
-            mode(tree.left)
-            if tree.val in hashmap:
-                hashmap[tree.val] += 1
+            inorder(tree.left)
+            if tree.val == value:
+                count += 1
             else:
-                hashmap[tree.val] = 1
-            mode(tree.right)
-        mode(root)
-        ans, m = [root.val], 0 
-        for key in hashmap:
-            if hashmap[key] > hashmap[ans[0]]:
-                ans = [key]
-            elif hashmap[key] == hashmap[ans[0]] and key != root.val:
-                ans.append(key)
-
-        return ans
-
+                value = tree.val
+                count = 1
+            if count > max_c:
+                mode = [value]
+                max_c = count
+            elif count == max_c:
+                mode.append(value)
+            inorder(tree.right)
+            
+        inorder(root)
+        return mode
 
         
