@@ -7,15 +7,19 @@
 class Solution:
     def hasPathSum(self, root: Optional[TreeNode], targetSum: int) -> bool:
         #down add
-        #if it isn't valid start to go up and subtract the node below
+        #if it isn't valid start to go up and get subtracted the ps
         if not root:
             return False
-        def dfs(node, rs):
-            if not node:
-                return False
-            rs += node.val
-            if not node.right and not node.left:
-                return rs == targetSum
-            return dfs(node.left,rs) or dfs(node.right,rs)
-        return dfs(root, 0)
+        queue = deque([(root.val, root)])
+        while queue:
+            for _ in range(len(queue)):
+                ps, node = queue.popleft()
+                if not node.left and not node.right:
+                    if ps == targetSum:
+                        return True
+                if node.left:
+                    queue.append((ps+node.left.val, node.left))
+                if node.right:
+                    queue.append((ps+node.right.val, node.right))
+        return False
         
