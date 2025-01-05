@@ -4,15 +4,18 @@ class Solution:
         # nums: []
         # return next greater elememt
         # iterate until it get next greater element
-        ans = []
-        numss = nums*2
-        for i in range(len(nums)):
-            j = i+1
-            while j < len(numss):
-                if nums[i] < numss[j]:
-                    ans.append(numss[j])
-                    break
-                j += 1
-            if len(ans)-1 < i:
-                ans.append(-1)
-        return ans 
+        stack = []
+        ans = [0]*len(nums)
+        for i in range(2*len(nums)-1,-1,-1):
+            while stack and stack[-1] <= nums[i%len(nums)]:
+                stack.pop()
+            if not stack:
+                ans[i%len(nums)] = -1
+            else:
+                ans[i%len(nums)] = stack[-1]
+            stack.append(nums[i%len(nums)])       
+
+        return ans
+
+
+
