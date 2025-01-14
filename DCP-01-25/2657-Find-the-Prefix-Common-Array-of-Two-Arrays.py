@@ -21,7 +21,6 @@ class Solution:
                 ans[hashmap[B[i]]] += 1
             ans[i] += count
             count = ans[i]
-            print(count, ans, hashmap)
         return ans
 
         
