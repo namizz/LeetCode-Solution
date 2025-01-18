@@ -4,8 +4,8 @@ class Solution:
         col = len(moveTime[0])
         heap = [(0,0,0)]
         visited = [[float('inf')]*col for _ in range(row)]
-
         direction = [(1,0),(-1,0),(0,1),(0,-1)]
+        visited[0][0] = 0
         while heap:
             time, x, y = heapq.heappop(heap)
 
@@ -14,12 +14,11 @@ class Solution:
             for dx, dy in direction:
                 cx, cy = x+dx, y+dy
                 if 0 <= cx < row and 0 <= cy < col:
-                    wait_time = max(moveTime[cx][cy]-time,0)
-                    new_time = time + 1 + wait_time
+                    wait_time = max(moveTime[cx][cy],time) + 1
 
-                    if new_time < visited[cx][cy]:
-                        visited[cx][cy] = new_time
-                        heapq.heappush(heap,(new_time, cx, cy))
+                    if wait_time < visited[cx][cy]:
+                        visited[cx][cy] = wait_time
+                        heapq.heappush(heap,(wait_time, cx, cy))
         return -1
 
         
