@@ -20,8 +20,8 @@ class Solution:
         for i in range(numCourses):
             for j in range(numCourses):
                 for k in range(numCourses):
-                    if arr[i][k] and arr[k][i]:
-                        arr[i][j] == 1
+                    if arr[i][j] and arr[k][i]:
+                        arr[k][j] = 1
         for ui, vi in queries:
             ans.append(arr[vi][ui] == 1)  
         return ans
