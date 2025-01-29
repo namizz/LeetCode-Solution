@@ -6,7 +6,7 @@ class Solution:
                 if i >= len(strs[j]) or strs[0][i] != strs[j][i]:
                     return "".join(ans)
                     
-            ans.append(strs[i][i])
+            ans.append(strs[0][i])
         return "".join(ans)
         
         
