@@ -6,11 +6,10 @@ class Solution:
             if command[i] == "G":
                 ans.append("G")
                 i += 1
-            elif command[i] == "(":
-                if command[i+1] == ")":
-                    ans.append("o")
-                    i += 2
-                else:
-                    ans.append("al")
-                    i += 4
+            elif command[i] == "(" and command[i+1] == ")":
+                ans.append("o")
+                i += 2
+            else:
+                ans.append("al")
+                i += 4
         return "".join(ans)
