@@ -8,8 +8,7 @@ class Solution:
                 initial = i+1
                 break
         while initial != 0 and initial < len(nums):
-            print(nums[initial], nums[(initial+1)%(len(nums)-1)])
-            if nums[initial] > nums[(initial+1)%(len(nums)-1)]:
+            if nums[initial] > nums[(initial+1)%(len(nums))]:
                 return False
             initial+=1
         return True
