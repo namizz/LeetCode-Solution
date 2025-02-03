@@ -15,6 +15,6 @@ class Solution:
             else:
                 temp = 1
             ans = max(temp, ans)
-        return ans
+        return max(temp, ans)
             
         
