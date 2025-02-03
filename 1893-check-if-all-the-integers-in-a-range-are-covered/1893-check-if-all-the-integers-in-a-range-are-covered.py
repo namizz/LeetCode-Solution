@@ -3,12 +3,11 @@ class Solution:
         # left 2, right = 5----> 2,3,4,5
         container = set()
         for r in ranges:
-            a, b  = r
-            for i in range(a,b+1):
+            a, b = r
+            for i in range(a, b + 1):
                 container.add(i)
-        for i in range(left, right+1):
+        print(container)
+        for i in range(left, right + 1):
             if i not in container:
                 return False
         return True
-
-        
