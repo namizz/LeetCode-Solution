@@ -34,9 +34,11 @@ class Solution:
             while digits > 10:
                 if not ans:
                     ans.append('+')
-                else:
-                    ans.append('*')
+                ans.append('*')
                 digits -= 1
+            if len(temp) > 10:
+                ans.append('-')
+
             ans.extend(list("***-***-"))
             ans.extend(temp[-4:])
         return "".join(ans)
