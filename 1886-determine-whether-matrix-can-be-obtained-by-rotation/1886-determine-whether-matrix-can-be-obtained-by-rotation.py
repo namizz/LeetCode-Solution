@@ -8,19 +8,16 @@ class Solution:
         n = len(mat)
 
         def rotate_90(mat):
+            rotated = [[0]*n for _ in range(n)]
             for i in range(n):
-                for j in range(i):
-                    mat[j][i], mat[i][j] = mat[i][j], mat[j][i]
-            for i in range(n):
-                l = 0
-                r = n - 1
-                while l < r:
-                    mat[i][l], mat[i][r] = mat[i][r], mat[i][l]
-                    l += 1
-                    r -= 1
-            return mat
+                for j in range(n):
+                    rotated[j][n-1-i] = mat[i][j]
+            print(rotated)
+            return rotated
 
         for _ in range(4):
             if rotate_90(mat) == target:
                 return True
+            else:
+                mat = rotate_90(mat)
         return False
