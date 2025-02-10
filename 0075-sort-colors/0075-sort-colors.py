@@ -1,23 +1,23 @@
 class Solution:
     def sortColors(self, nums: List[int]) -> None:
-        lp = 0
-        rp = len(nums)-1
-        while lp < rp:
-            if nums[lp] == 2 and nums[rp] != 2:
-                nums[lp], nums[rp] = nums[rp], nums[lp]
-                lp += 1
-                rp -= 1
-            if nums[lp] != 2:
-                lp += 1
-            if nums[rp] == 2:
-                rp -= 1
-        lp = 0
-        while lp < rp:
-            if nums[lp] != 0 and nums[rp] != 1:
-                nums[lp], nums[rp] = nums[rp], nums[lp]
-                lp += 1
-                rp -= 1
-            if nums[lp] == 0:
-                lp += 1
-            if nums[rp] == 1:
-                rp -= 1
+        """
+        Do not return anything, modify nums in-place instead.
+        """
+        p1 = 0
+        for i in range(len(nums)):
+            if nums[i] == 0 and p1 != i:
+                nums[i], nums[p1] = nums[p1], nums[i]
+            while p1 < i and nums[p1] == 0:
+                p1 += 1
+            
+        print(nums, p1)
+        for i in range(p1,len(nums)):
+            if nums[i] == 1 and p1 != i:
+                nums[i], nums[p1] = nums[p1], nums[i]
+            while p1 < i and nums[p1] == 1:
+                p1 += 1
+        return nums
+
+
+            
+        
