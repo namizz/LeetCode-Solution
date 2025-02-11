@@ -4,14 +4,14 @@ class Solution:
         ans = []
         np = 1-len(part)
         list_part = list(part[:len(part)-1])
-        print(list_part)
         for i in range(len(s)):
-            print(ans[np:], i)
             if s[i] == part[-1] and ans[np:] == list_part:
                 deleted = len(list_part)
                 while deleted > 0:
                     ans.pop()
                     deleted -= 1
+            elif s[i] == part[-1] and len(list_part) == 0:
+                continue
             else:
                 ans.append(s[i])
         return "".join(ans)
