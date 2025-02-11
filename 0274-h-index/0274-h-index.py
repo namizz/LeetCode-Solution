@@ -5,7 +5,7 @@ class Solution:
         for i in range(len(citations)):
             ans = min(citations[i], len(citations)-i)
             if citations[i] >= len(citations)-i:
-                break
-        return ans
+                return ans
+        return 0
 
         
