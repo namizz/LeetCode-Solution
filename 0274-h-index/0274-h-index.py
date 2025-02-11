@@ -3,10 +3,8 @@ class Solution:
         citations.sort()
         ans = 0
         for i in range(len(citations)):
-            if citations[i] <= len(citations)-i:
-                ans = citations[i]
-            else:
-                ans = max(len(citations)-i,ans)
+            ans = min(citations[i], len(citations)-i)
+            if citations[i] >= len(citations)-i:
                 break
         return ans
 
