@@ -12,5 +12,5 @@ class Solution:
                 window[nums[j]] -= 1
                 j += 1
             ans = max(ans, window[1]+k)
-        return ans
+        return ans if ans <= len(nums) else len(nums)
                     
