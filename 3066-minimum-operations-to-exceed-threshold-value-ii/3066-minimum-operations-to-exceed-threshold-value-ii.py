@@ -4,16 +4,15 @@ class Solution:
         # replace it and remove one element 
         # 
         nums.sort(reverse = True)
-        n = len(nums)
+        ans = 0
         # print(nums)
-        result = min(nums[-1], nums[-2])*2 + max(nums[-1], nums[-2])
-        while result < k:
+        while nums[-1] < k:
             x = nums.pop()
             y = nums.pop()
             result = min(x,y)*2 + max(x,y)
-            nums.append(result)
+            insort(nums, result, key=lambda x: -x)
+            ans += 1
         # print(nums)
-        return n - len(nums) 
-
+        return ans
 
         
