@@ -1,27 +1,16 @@
 class Solution:
     def largestNumber(self, nums: List[int]) -> str:
-        #non - negative numbers
-        # storing the array of the first digit in hash with there postion order and first digits in an array
-        # sort the first digit arrays append them from the value of hash 
-        #join
-
-        hash = {}
-        digits = []
-        for i in range(len(nums)):
-            leng = len(str(nums[i])) - 1
-            first_digit = nums[i] // 10**leng
-            digits.append((first_digit, nums[i]))
-            hash[first_digit] = i
-        sort_d = sorted(digits, key=lambda x: str(x[1]) * 10, reverse=True)
         ans = []
+        arr = []
         for i in range(len(nums)):
-            ans.append(sort_d[i][1])
-        number = "".join(map(str,ans)) 
-        return number if number[0] != '0' else '0' 
+            leng = len(str(nums[i]))-1
+            first = nums[i]// 10**leng
+            arr.append((first, nums[i]))
 
+        sorted_arr = sorted(arr, key=lambda x: str(x[1])*10 , reverse=True)
+        for _,i in sorted_arr:
+            ans.append(str(i))
+        return "".join(ans) if ans[0] != "0" else "0"
 
-
-            
-        
 
         
