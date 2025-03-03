@@ -14,7 +14,6 @@ class Solution:
         while curr:
             curr = curr.next
             lng += 1
-        print(lng)
         i = 0
         curr = dummy.next
         while i < lng//k:
