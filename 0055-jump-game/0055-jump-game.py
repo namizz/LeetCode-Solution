@@ -1,23 +1,21 @@
 class Solution:
     def canJump(self, nums: List[int]) -> bool:
-        checker = 0
-        last_zero = False
+        ans = [0]*(len(nums)+1)
         if nums == [0]:
             return True
-        for i in range(len(nums)-1, -1,-1):
-            if nums[i] == 0:
-                if i == len(nums)-1:
-                    last_zero = True
-                checker += 1
-            elif last_zero and checker <= nums[i]:
-                checker = 0 
-                last_zero = False
-            elif checker and checker < nums[i]:
-                checker = 0
-            elif checker:
-                checker += 1
+        for i in range(len(nums)):
+            ans[i] += 1
+            if nums[i]+i < len(nums): 
+                ans[nums[i]+i] -= 1
+    
+        for i in range(len(nums)-1):
+            if i != 0:
+                ans[i] += ans[i-1]
+            if ans[i] == 0:
+                return False
+        return True
+
         
-        return not checker
 
 
 
