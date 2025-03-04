@@ -12,14 +12,15 @@ class Solution:
         # [xs, xe] what should be the efficient point to brust the first ballon and other if possible
         # x = xe
         # remove all ballon when x is in there range target the next existing ballon
-        sort_points = sorted(points, key= lambda x : x[1])
-        x = float(inf)
+        sort_points = sorted(points, key= lambda x : x[0])
+        x = float(-inf)
         arrow = 0
-        print(sort_points)
         for xs,xe in sort_points:
-            if not (xs <= x <= xe):
+            if xs > x:
                 arrow += 1
                 x = xe
+            else:
+                x = min(xe,x)
         return arrow
 
         
