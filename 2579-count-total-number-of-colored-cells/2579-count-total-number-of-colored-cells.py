@@ -3,9 +3,8 @@ class Solution:
         if n == 1:
             return 1
         ans = 1
-        for i in range(3,n+1):
-            ans += (i-2)*4
-            ans += 4
+        ans += (((n-2)*(n-1))//2)*4
+        ans += 4*(n-2)
         return ans + 4
 
 
