@@ -4,15 +4,18 @@ class Solution:
         # row(3)
         # row(2)
         # row(1)
-
-        ans = [0,1,0]
-        for i in range(rowIndex):
+        def operation(x):
             temp = []
-            temp.append(0)
-            for i in range(len(ans)-1):
-                temp.append(ans[i]+ans[i+1])
-            temp.append(0)
-            ans = temp
-        return ans[1:-1]
-
+            temp.append(1)
+            for i in range(len(x)-1):
+                temp.append(x[i]+x[i+1])
+            temp.append(1)
+            return temp
+        if rowIndex == 0:
+            return [1]
+        if rowIndex == 1:
+            return [1,1]
+        ans = operation(self.getRow(rowIndex-1))
+        
+        return ans
         
