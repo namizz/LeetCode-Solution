@@ -2,7 +2,6 @@ class MyQueue:
 
     def __init__(self):
         self.stack = []
-        self.t = 0
         
 
     def push(self, x: int) -> None:
@@ -10,20 +9,25 @@ class MyQueue:
         
 
     def pop(self) -> int:
-        if len(self.stack) > self.t:
-            self.t += 1
-            return self.stack[self.t-1]
-        
+        temp = []
+        print(self.stack)
+        while self.stack:
+            temp.append(self.stack.pop())
+        x = temp.pop()
+        print(temp)
+        self.stack = []
+        while temp:
+            self.stack.append(temp.pop())
+        return x
 
     def peek(self) -> int:
-        if len(self.stack) > self.t:
-            return self.stack[self.t]
+        return self.stack[0]
+
         
 
     def empty(self) -> bool:
-        if len(self.stack) > self.t:
-            return False
-        return True
+        return not self.stack
+        
         
 
 
