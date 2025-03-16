@@ -8,6 +8,8 @@ class Solution:
     def largestValues(self, root: Optional[TreeNode]) -> List[int]:
         queue = deque([root])
         ans = []
+        if not root:
+            return []
         while queue:
             _max = float(-inf)
             temp = deque()
