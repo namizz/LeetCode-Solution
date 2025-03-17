@@ -18,13 +18,14 @@ class Solution:
                 a.append(v.val)
             ans.append(a if zig else a[::-1])
             for _ in range(len(queue)):
-                node = queue.pop()
+                node = queue.popleft()
                 if node.left:
                     temp.append(node.left)
                 if node.right:
                     temp.append(node.right)
             zig = not zig
             queue = temp
+        # 23
         return ans                
 
 
