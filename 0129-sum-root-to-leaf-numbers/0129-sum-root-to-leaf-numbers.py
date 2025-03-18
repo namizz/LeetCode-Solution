@@ -6,24 +6,16 @@
 #         self.right = right
 class Solution:
     def sumNumbers(self, root: Optional[TreeNode]) -> int:
-        stack = []
-        ans= 0
-        def adder(temp):
-            num = int("".join(list(map(str, temp))))
-            return num
-       
-        def summer(root):
-            nonlocal ans
+        def summer(root, total):
             if not root:
-                return 
-            stack.append(root.val)
+                return 0
             if not root.left and not root.right:
-                ans += adder(stack)
-            left = summer(root.left)
-            right = summer(root.right)
-            stack.pop()
-        summer(root)
-        return ans
+                return total*10 + root.val
+            res = 0
+            res += summer(root.left, total*10 + root.val)
+            res += summer(root.right, total*10 + root.val)
+            return res
+        return summer(root,0)
             
 
         
