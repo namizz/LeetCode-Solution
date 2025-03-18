@@ -6,45 +6,34 @@
 #         self.right = right
 class Solution:
     def deleteNode(self, root: Optional[TreeNode], key: int) -> Optional[TreeNode]:
-        prev = root
-        deleted = root
-        while deleted and deleted.val != key:
-            prev = deleted
-            if deleted.val > key:
-                deleted = deleted.left
-            else:
-                deleted = deleted.right
-        if deleted:
-            if deleted.right:
-                rep = deleted.right
-                rep_prev = deleted
-                while rep.left:
-                    rep_prev = rep
-                    rep = rep.left
-                rep.val, deleted.val = deleted.val, rep.val
-                if rep.right:
-                    if rep_prev.left == rep:
-                        rep_prev.left = rep.right
-                    else:
-                        rep_prev.right = rep.right
-                elif rep_prev.right and rep_prev.right== rep:
-                    rep_prev.right = None
+        def search(root):
+            if not root:
+                return None
+            if root.val == key:
+                if not root.left and not root.right:
+                    return None
+                elif root.right and not root.left:
+                    return root.right
+                elif root.left and not root.right:
+                    return root.left
                 else:
-                    rep_prev.left = None
-            elif deleted.left:
-                if deleted == prev:
-                    root = deleted.left
-                elif prev.left == deleted:
-                    prev.left = deleted.left
-                else:
-                    prev.right = deleted.left
-            elif prev.left and prev.left == deleted:
-                prev.left = None
-            elif not prev.right and not prev.left:
-                return prev.left
+                    replaced = root.right
+                    added = root.left
+                    temp = replaced
+                    while temp.left:
+                        temp = temp.left
+                    root.val = temp.val
+                    temp.val = key
+                    root.right = search(root.right)
+                    return root
+            elif root.val > key:
+                root.left = search(root.left)
+                return root
             else:
-                prev.right = None
+                root.right = search(root.right)
+                return root
 
+        root = search(root)
         return root
 
 
