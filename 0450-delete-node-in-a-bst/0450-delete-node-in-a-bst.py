@@ -34,8 +34,10 @@ class Solution:
             elif deleted.left:
                 if deleted == prev:
                     root = deleted.left
-                else:
+                elif prev.left == deleted:
                     prev.left = deleted.left
+                else:
+                    prev.right = deleted.left
             elif prev.left and prev.left == deleted:
                 prev.left = None
             elif not prev.right and not prev.left:
