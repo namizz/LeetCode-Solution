@@ -24,11 +24,13 @@ class Solution:
                     av = False
                     break
             if not av:
-                r_set.remove(rec)
+                if rec in r_set:
+                    r_set.remove(rec)
                 return 0
             elif not needed_rec:
                 r_supplies.add(rec)
-                r_set.remove(rec)
+                if rec in r_set:
+                    r_set.remove(rec)
                 return rec
             else:
                 hashmap[rec] = needed_rec
@@ -40,7 +42,6 @@ class Solution:
             if available:
                 ans.append(available)
         b = len(hashmap)+1
-        print("start", hashmap)
 
         while len(hashmap) and len(hashmap) < b:
             deleted = []
