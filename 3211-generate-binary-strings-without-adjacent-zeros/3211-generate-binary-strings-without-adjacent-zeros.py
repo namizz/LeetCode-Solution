@@ -5,7 +5,6 @@ class Solution:
             if len(path) == n:
                 ans.append("".join(path))
                 return
-            print(path)
             back(path+['0'])
             back(path+['1'])
         back([])
