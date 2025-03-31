@@ -4,12 +4,12 @@ class Solution:
         # *         |       *
         l = 0
         ans = 0
-        houses.sort()
-        heaters.sort()
         for i in range(len(houses)):
-            while l < len(heaters)-1 and abs(houses[i]-heaters[l]) >= abs(houses[i]-heaters[l+1]):
+            if l < len(heaters)-1 and abs(houses[i]-heaters[l]) >= abs(houses[i]-heaters[l+1]):
                 l += 1
             ans = max(ans, abs(houses[i]-heaters[l]))
+
+
         return ans
 
 
