@@ -9,13 +9,12 @@ class Solution:
         ans = 0
         queue = deque([k])
         arr = [float(inf)]*(n+1)
-        # visited = [False] *(n+1)
         arr[k] = 0
         while queue:
             for neg in hashmap[queue[0]]:
                 # operate short path
                 node, t = neg
-                if t+arr[queue[0]] > arr[node]:
+                if t+arr[queue[0]] >= arr[node]:
                     continue
                 arr[node] = t + arr[queue[0]]
                 queue.append(node)
