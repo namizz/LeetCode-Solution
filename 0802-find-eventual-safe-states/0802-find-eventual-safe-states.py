@@ -1,28 +1,32 @@
 class Solution:
     def eventualSafeNodes(self, graph: List[List[int]]) -> List[int]:
-        n = len(graph)
-        res = []
-        visited = set()
-        memo = [0] * n
+        indeg = defaultdict(int)
+        hashmap = defaultdict(list)
 
-        def dfs(i):
-            if memo[i] == 1 or len(graph[i]) == 0:
-                return True
-            elif memo[i] == -1 or i in visited:
-                return False
-            
-            visited.add(i)
-            
-            for neighbour in graph[i]:
-                if not dfs(neighbour):
-                    memo[i] = -1
-                    return False
+        for i in range(len(graph)):
+            for j in graph[i]:
+                hashmap[j].append(i)
+                indeg[i] += 1
+        # print(hashmap)
+        # print(indeg)
+        queue = deque()
+        for i in range(len(graph)):
+            if not indeg[i]:
+                queue.append(i)
+        # print(queue)
 
-            memo[i] = 1
-            return True
-        
-        for i in range(n):
-            if dfs(i):
-                res.append(i)
-        
-        return res
+        ans = []
+        while queue:
+            n = queue.popleft()
+            ans.append(n)
+            for i in hashmap[n]:
+                indeg[i] -= 1
+                if not indeg[i]:
+                    queue.append(i)
+                
+                
+        return sorted(ans)
+
+
+
+       
