@@ -1,18 +1,18 @@
 class Solution:
     def minOperations(self, nums: List[int], k: int) -> int:
-        # take 2 element from the sort array and then do the operation
-        # replace it and remove one element 
-        # 
-        nums.sort(reverse = True)
+        heapify(nums)
+        x = heapq.heappop(nums)
+        y = heapq.heappop(nums)
         ans = 0
-        # print(nums)
-        while nums[-1] < k:
-            x = nums.pop()
-            y = nums.pop()
-            result = min(x,y)*2 + max(x,y)
-            insort(nums, result, key=lambda x: -x)
+        while x < k:
             ans += 1
-        # print(nums)
+            heapq.heappush(nums, min(x,y)*2 + max(x,y))
+            if len(nums) >= 2:
+                x = heapq.heappop(nums)
+                y = heapq.heappop(nums)
+            else:
+                break
+
         return ans
 
         
