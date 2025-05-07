@@ -1,33 +1,28 @@
 class Solution:
-    def _is_connected(self, src, target, visited, adj_list):
-        visited[src] = True
+    def findRedundantConnection(self, edges):
+        par = [i for i in range(len(edges)+1)]
+        rank = [1] * (len(edges)+1)
+        def find(x):
+            x = par[x]
+            while x != par[x]:
+                par[x] = par[par[x]]
+                x = par[x]
+            return x
+        def unioin(x,y):
+            p1, p2 = find(x), find(y)
+            if p1 == p2:
+                return False
+            if rank[p1] > rank[p2]:
+                par[p2] = p1
+                rank[p1] += rank[p2]
+            else:
+                par[p1] = p2
+                rank[p2] += rank[p1]
 
-        if src == target:
             return True
-
-        is_found = False
-        for adj in adj_list[src]:
-            if not visited[adj]:
-                is_found = is_found or self._is_connected(
-                    adj, target, visited, adj_list
-                )
-
-        return is_found
-    def findRedundantConnection(self, edges: List[List[int]]) -> List[int]:
-        #dfp when visted node is repeted remove the edge
-        N = len(edges)
-
-        adj_list = [[] for _ in range(N)]
-
-        for edge in edges:
-            visited = [False] * N
-
-            # If DFS returns True, we will return the edge.
-            if self._is_connected(edge[0] - 1, edge[1] - 1, visited, adj_list):
-                return edge
-
-            adj_list[edge[0] - 1].append(edge[1] - 1)
-            adj_list[edge[1] - 1].append(edge[0] - 1)
-
-        return []
+        for a,b in edges:
+            if not unioin(a,b):
+                return [a,b]
+        
+        
             
