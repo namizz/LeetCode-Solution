@@ -1,10 +1,10 @@
 class Solution:
     def missingNumber(self, nums: List[int]) -> int:
-        n = len(nums)
-        s = (n*(n+1))//2
-        for i in range(n):
-            s -= nums[i]
-        return s
+        ans = 0
+        for i in range(len(nums)):
+            ans ^= i
+            ans ^= nums[i]
+        return ans ^ len(nums)
         
 
         
