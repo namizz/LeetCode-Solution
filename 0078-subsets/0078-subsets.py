@@ -1,14 +1,19 @@
 class Solution:
     def subsets(self, nums: List[int]) -> List[List[int]]:
-        ans, path = [], []
-        def sub(i, combination):
-            if i >= len(nums):
-                ans.append(combination[:])
-                return
-            combination.append(nums[i])
-            sub(i+1, combination)
-            combination.pop()
-            sub(i+1, combination)
-        sub(0,[])
+        ans = []
+        for i in range(2**len(nums)):
+            print(i)
+            k = i
+            it = 0
+            temp = []
+            while k > 0:
+                bt = k & 1
+                k >>= 1
+                if bt:
+                    temp.append(nums[it])
+                it += 1
+            print(temp)
+            ans.append(temp)
         return ans
+
         
