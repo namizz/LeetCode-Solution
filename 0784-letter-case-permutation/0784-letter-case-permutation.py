@@ -5,6 +5,8 @@ class Solution:
             if not s[i].isdigit():
                 alpha.append(i)
         # print(alpha)
+        if not alpha:  # all characters are digits
+            return [s]
         ans = []
         for i in range(2**(len(alpha))):
             # print(i, bin(i))
