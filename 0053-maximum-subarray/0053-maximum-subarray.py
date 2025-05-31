@@ -1,14 +1,25 @@
 class Solution:
     def maxSubArray(self, nums: List[int]) -> int:
-        # brute force is 
-        # check for nums[0] -> len(nums[i])
-        # -2, -1, -4, 0, -1, 1, 2, -3, 1
-        # 0: -2, 1: -1, 2: -1, 3: 0, 4: 0, 5: 1, 6: 2, 7:2, 8:2
-        c_sum = 0
-        _max = float(-inf)
-        for i in range(len(nums)):
-            if c_sum < 0:
-                c_sum = 0
-            c_sum += nums[i]
-            _max = max(c_sum, _max)
-        return _max
+        def rec(l,r):
+            if l+1 >= r:
+                return nums[l]          
+            mid = (l+r)//2
+            left = rec(l,mid)
+            right = rec(mid,r)
+            left_sum = float('-inf')
+            temp = 0
+            for i in range(mid - 1, l - 1, -1):
+                temp += nums[i]
+                left_sum = max(left_sum, temp)
+
+            right_sum = float('-inf')
+            temp = 0
+            for i in range(mid, r):
+                temp += nums[i]
+                right_sum = max(right_sum, temp)
+
+            cross = left_sum + right_sum
+
+            return max(left, right, cross)
+        return rec(0, len(nums))
+        
