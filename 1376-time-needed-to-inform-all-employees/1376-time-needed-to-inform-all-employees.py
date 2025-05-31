@@ -7,13 +7,11 @@ class Solution:
         queue = deque([(headID, informTime[headID])])
         ans = 0
         while queue:
-            time = 0
             for i in range(len(queue)):
                 x, t = queue.popleft()
-                time = max(t, time)
+                ans = max(t, ans)
                 for des in graph[x]:
                     queue.append((des, informTime[des]+t))
-            ans = max(time, ans)
         return ans
                 
         
