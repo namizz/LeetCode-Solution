@@ -12,15 +12,17 @@ class Solution:
             if i not in visited:
                 queue = deque([i])
                 visited.add(i)
+                node = {i}
                 k = 0
                 while queue:
                     x = queue.popleft()
                     for des in graph[x]:
+                        k += 1
                         if des not in visited:
                             queue.append(des)
                             visited.add(des)
-                        k += 1
-                if check(len(graph[i])+1, k):
+                            node.add(des)
+                if check(len(node), k):
                     ans += 1
         return ans
 
