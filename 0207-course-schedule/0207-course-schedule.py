@@ -12,15 +12,13 @@ class Solution:
         for i in range(numCourses):
             if indegree[i] == 0:
                 queue.append(i)
-                visited.add(i)
                 k += 1
         while queue:
             for _ in range(len(queue)):
                 x = queue.popleft()
                 for i in graph[x]:
                     indegree[i] -= 1
-                    if not indegree[i] and i not in visited:
+                    if not indegree[i]:
                         queue.append(i)
-                        visited.add(i)
                         k += 1
         return k == numCourses
