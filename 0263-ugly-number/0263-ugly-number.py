@@ -3,7 +3,8 @@ class Solution:
         temp = n
         if temp == 0:
             return False
-        while(1):
+        else:
+            while(1):
                 if(temp%2 == 0):
                     temp /=2
     
