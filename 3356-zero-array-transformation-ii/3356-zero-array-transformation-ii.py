@@ -13,13 +13,13 @@ class Solution:
                 prefix[l] -= v
                 prefix[r+1] += v
                 j += 1
+            if j == len(queries):
+                return -1
             for i in range(1,len(prefix)):
                 prefix[i] += prefix[i-1]
             _max = float(-inf)
             for i in range(len(nums)):
                 nums[i] += prefix[i]
                 _max = max(nums[i],_max)
-            if j == len(queries) and _max > 0:
-                return -1
         return j
         
