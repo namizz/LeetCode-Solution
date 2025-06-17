@@ -3,7 +3,7 @@ class Solution:
         row = len(isWater)
         col = len(isWater[0])
         queue = deque()
-        height = [[0]*row for _ in range(col)]
+        height = [[0]*col for _ in range(row)]
         visited = set()
         for r in range(row):
             for c in range(col):
