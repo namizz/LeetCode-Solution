@@ -18,7 +18,7 @@ class Solution:
             rootx = find(graph, x)
             rooty = find(graph, y)
             if rootx != rooty:
-                graph[y] = rootx
+                graph[rooty] = rootx
                 return True
             return False
         for t,u,v in edges:
@@ -29,14 +29,17 @@ class Solution:
                 if not union(Bob, u,v):
                     ans += 1
             else:
-                if not (union(Alice, u,v) and union(Bob, u,v)):
+                k = union(Alice, u, v) 
+                l = union(Bob, u, v)
+                if not(k and l):
                     ans += 1
-
+   
         rootAlice = set()
         rootBob = set()
         for i in range(1, n+1):
             rootAlice.add(find(Alice,i))
             rootBob.add(find(Bob,i))
+
         return ans if len(rootAlice)+len(rootBob) == 2 else -1
             
 
