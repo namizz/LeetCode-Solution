@@ -4,20 +4,23 @@ class FindSumPairs:
         self.hashmap = defaultdict(int)
         self.nums1 = nums1
         self.nums2 = nums2
-        for k in nums1:
-            for v in nums2:
-                self.hashmap[k+v] += 1
+        for k in nums2:
+            self.hashmap[k] += 1
             
 
     def add(self, index: int, val: int) -> None:
-        for k in self.nums1:
-            self.hashmap[k+self.nums2[index]] -= 1
+        self.hashmap[self.nums2[index]] -= 1
         self.nums2[index] += val
-        for k in self.nums1:
-            self.hashmap[k+self.nums2[index]] += 1
+        self.hashmap[self.nums2[index]] += 1
         
 
     def count(self, tot: int) -> int:
+        ans = 0
+        for k in self.nums1:
+            if tot-k in self.hashmap:
+                ans+= self.hashmap[tot-k]
+        return ans
+
         return self.hashmap[tot]
         
 
