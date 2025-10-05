@@ -35,9 +35,9 @@ class Solution:
         
 
         for i in range(col):
-            dfs(col-1,i,atlantic)
+            dfs(row-1,i,atlantic)
         for i in range(row):
-            dfs(i,row-1,atlantic)
+            dfs(i,col-1,atlantic)
         
        
 
