@@ -12,8 +12,6 @@ class Solution:
         ans = [-1]*len(rains)
         hashmap = {}
         for i in range(len(rains)):
-            print(hashmap)
-            print(zero)
             if not rains[i]:
                 zero.append(i)
             else:
