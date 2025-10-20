@@ -1,9 +1,11 @@
 class Solution:
     def finalValueAfterOperations(self, operations: List[str]) -> int:
         ans = 0
-        for op in operations:
-            if op == "--X" or op == "X--":
-                ans-=1
+        for i in operations:
+            if i[0] == "-" or i[-1] == "-":
+                ans -= 1
             else:
-                ans+=1
+                ans += 1
         return ans
+
+        
