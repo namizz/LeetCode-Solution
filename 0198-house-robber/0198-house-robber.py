@@ -1,15 +1,11 @@
 class Solution:
     def rob(self, nums: List[int]) -> int:
-        ans = 0
-        cache = {}
-        def rec(i):
-            if i >= len(nums):
-                return 0
-            if i in cache:
-                return cache[i]
-            a = nums[i] + rec(i+2)
-            b = nums[i] + rec(i+3)
-            cache[i] = max(a,b)
-            return cache[i]
-        return max(rec(0), rec(1))
+        dp = [0]*len(nums)
+        dp[0] = nums[0]
+        if not len(nums)-1:
+            return dp[-1]
+        dp[1] = max(nums[1], nums[0])
+        for i in range(2,len(nums)):
+            dp[i] = max(dp[i-2]+nums[i], dp[i-1])
+        return dp[-1]
         
