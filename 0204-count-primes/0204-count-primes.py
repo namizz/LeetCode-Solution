@@ -1,16 +1,17 @@
 class Solution:
     def countPrimes(self, n: int) -> int:
-        def prime(x):
-            d = 2
-            while d*d <= x:
-                if not x%d:
-                    return False
-                d += 1
-            return True
-        ans = 0
-        for i in range(2,n):
-            if prime(i):
-                ans += 1
-        return ans
+        if n < 2:
+            return 0
+        arr = [True]*n
+        arr[0] = arr[1] = False
+
+        p = 2
+        while p*p < n:
+            if arr[p]:
+                for i in range(p*p, n, p):
+                    arr[i] = False                
+
+            p += 1
+        return sum(arr)
 
         
