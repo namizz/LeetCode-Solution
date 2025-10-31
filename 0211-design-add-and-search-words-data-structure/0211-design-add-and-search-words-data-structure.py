@@ -26,7 +26,7 @@ class WordDictionary:
                 for child in node.children.values():
                     if dfs(child, i+1):
                         return True
-                    return False
+                return False
             else:
                 if c not in node.children:
                     return False
