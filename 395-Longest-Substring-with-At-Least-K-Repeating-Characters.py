@@ -1,23 +1,34 @@
 class Solution:
     def longestSubstring(self, s: str, k: int) -> int:
-        # valid if all string has at least k length
-        # invalid if all string are less than k lenghth
-        # for every index we use sliding window to check if they are valid or not
-        # one hash map and one set
-        # the hasmpa track the frequency of number
-        # set check if the freuency of number is at least k length 
-        # length of hashmap and set are the same valid
         ans = 0
-        for l in range(len(s)):
+        for t in range(1,27):
             hashmap = {}
-            contain = set()
-            for r in range(l,len(s)):
+            l = 0
+            d = 0
+            c = 0
+            for r in range(len(s)):
+                if s[r] not in hashmap:
+                    d += 1
                 hashmap[s[r]] = hashmap.get(s[r],0) + 1
-                if hashmap[s[r]] >= k:
-                    contain.add(s[r])
-                if len(hashmap) == len(contain):
+
+                if hashmap[s[r]] == k:
+                    c += 1
+
+                while d > t:
+                    if hashmap[s[l]] == k:
+                        c -= 1
+                    hashmap[s[l]] -= 1
+                    if not hashmap[s[l]]:
+                        d -= 1
+                        del hashmap[s[l]]
+                    l += 1
+                if d == t and c == t:
                     ans = max(ans, r-l+1)
         return ans
+                
+                
+
+
                  
 
             
